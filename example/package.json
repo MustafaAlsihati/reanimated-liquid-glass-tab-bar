@@ -1,0 +1,27 @@
+{
+  "name": "reanimated-liquid-glass-tab-bar-example",
+  "version": "1.0.0",
+  "private": true,
+  "main": "expo-router/entry",
+  "scripts": {
+    "start": "expo start",
+    "android": "expo start --android",
+    "ios": "expo start --ios"
+  },
+  "dependencies": {
+    "@expo/vector-icons": "^15.0.2",
+    "expo": "~57.0.20",
+    "expo-blur": "~57.0.3",
+    "expo-constants": "~57.0.20",
+    "expo-linking": "~57.0.11",
+    "expo-router": "~57.0.19",
+    "expo-status-bar": "~57.0.1",
+    "react": "19.2.8",
+    "react-native": "0.86.3",
+    "react-native-reanimated": "4.5.1",
+    "react-native-safe-area-context": "~5.7.0",
+    "react-native-screens": "~4.26.0",
+    "react-native-worklets": "0.10.1",
+    "reanimated-liquid-glass-tab-bar": "^0.1.0"
+  }
+}

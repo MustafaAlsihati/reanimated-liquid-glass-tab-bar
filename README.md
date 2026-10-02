@@ -11,6 +11,20 @@ A floating, frosted-glass tab bar for React Native, built with [Reanimated](http
 - **Right-to-left aware.** The bar is either always left to right, or fully mirrored.
 - Accessible: every tab is a `tab` with a label that includes its badge.
 
+## Screenshots
+
+<table>
+  <tr>
+    <td align="center"><img src="https://raw.githubusercontent.com/MustafaAlsihati/reanimated-liquid-glass-tab-bar/main/docs/screenshots/expanded.png" width="170" alt="Expanded"><br><sub>Expanded</sub></td>
+    <td align="center"><img src="https://raw.githubusercontent.com/MustafaAlsihati/reanimated-liquid-glass-tab-bar/main/docs/screenshots/collapsed.png" width="170" alt="Collapsed on scroll"><br><sub>Collapsed on scroll</sub></td>
+    <td align="center"><img src="https://raw.githubusercontent.com/MustafaAlsihati/reanimated-liquid-glass-tab-bar/main/docs/screenshots/cart-collapsed.png" width="170" alt="Bubble focused"><br><sub>Bubble focused</sub></td>
+    <td align="center"><img src="https://raw.githubusercontent.com/MustafaAlsihati/reanimated-liquid-glass-tab-bar/main/docs/screenshots/dark-expanded.png" width="170" alt="Dark"><br><sub>Dark</sub></td>
+    <td align="center"><img src="https://raw.githubusercontent.com/MustafaAlsihati/reanimated-liquid-glass-tab-bar/main/docs/screenshots/dark-collapsed.png" width="170" alt="Dark, collapsed"><br><sub>Dark, collapsed</sub></td>
+  </tr>
+</table>
+
+From the [example app](example), on an Android emulator. On Android the glass is a translucent tint over the content (see [Blur on Android](#blur-on-android)). With the bubble focused, the collapsed pill keeps showing the tab that was focused before it.
+
 ## Install
 
 ```sh
@@ -227,7 +241,7 @@ Pass any part of the theme; the rest keeps its default:
 | `highlightOpacity`     | `0.18`                     | Opacity of the circle behind the focused icon.                   |
 | `glassTint`            | `rgba(255,255,255,0.55)`   | Color laid over the blur, so icons stay legible on any content.  |
 | `borderColor`          | `rgba(255,255,255,0.5)`    | The thin outline of the glass.                                   |
-| `shadowColor`          | `#000000`                  | Color of the shadow under the bar.                               |
+| `shadowColor`          | `#000000`                  | Color of the shadow under the bar. iOS only: Android has none.   |
 | `badgeBackgroundColor` | `#FF3B30`                  | Badge fill.                                                      |
 | `badgeTextColor`       | `#FFFFFF`                  | Badge text.                                                      |
 
@@ -236,7 +250,7 @@ The blur has its own props: `blurIntensity` (`70`) and `blurTint` (`'light'`, or
 ```tsx
 const dark = {
   activeColor: '#0A84FF',
-  inactiveColor: '#98989D',
+  inactiveColor: '#AEAEB2',
   glassTint: 'rgba(28,28,30,0.55)',
   borderColor: 'rgba(255,255,255,0.15)',
 };

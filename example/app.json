@@ -1,0 +1,12 @@
+{
+  "expo": {
+    "name": "Glass Tab Bar Example",
+    "slug": "glass-tab-bar-example",
+    "scheme": "glass-tab-bar-example",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "automatic",
+    "newArchEnabled": true,
+    "plugins": ["expo-router"]
+  }
+}
