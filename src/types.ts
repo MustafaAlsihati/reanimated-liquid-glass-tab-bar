@@ -11,7 +11,7 @@ export interface TabBarIconProps {
 }
 
 export interface TabBarItem {
-  /** Unique within the bar. With `LiquidGlassTabBarAdapter` this is the route name. */
+  /** Unique within the bar. With `LiquidGlassTabBar` this is the route name. */
   key: string;
   /** Read by screen readers. The bar shows icons only. */
   label: string;
@@ -42,7 +42,7 @@ export interface LiquidGlassTabBarTheme {
   badgeTextColor: string;
 }
 
-export interface LiquidGlassTabBarProps {
+export interface LiquidGlassTabBarViewProps {
   /** The tabs in the pill, in order. */
   items: TabBarItem[];
   /**

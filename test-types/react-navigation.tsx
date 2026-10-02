@@ -1,11 +1,11 @@
 // Type-only check, run by `yarn typecheck`: the adapter must accept React
-// Navigation's real `BottomTabBarProps` as is, and `LiquidGlassTabBar` must
+// Navigation's real `BottomTabBarProps` as is, and `LiquidGlassTabBarView` must
 // accept the props a typical app passes.
 import type { BottomTabBarProps } from '@react-navigation/bottom-tabs';
 import { Text } from 'react-native';
 import {
+  LiquidGlassTabBarView,
   LiquidGlassTabBar,
-  LiquidGlassTabBarAdapter,
   TabBarCollapseProvider,
   useTabBarScrollHandler,
   type TabBarItem,
@@ -18,7 +18,7 @@ const items: TabBarItem[] = [
 const bubbleItem: TabBarItem = { key: 'search', label: 'Search', icon: ({ color }) => <Text style={{ color }}>S</Text> };
 
 export function tabBar(props: BottomTabBarProps) {
-  return <LiquidGlassTabBarAdapter {...props} items={items} bubbleItem={bubbleItem} />;
+  return <LiquidGlassTabBar {...props} items={items} bubbleItem={bubbleItem} />;
 }
 
 export function controlled() {
@@ -26,7 +26,7 @@ export function controlled() {
   void onScroll;
   return (
     <TabBarCollapseProvider>
-      <LiquidGlassTabBar
+      <LiquidGlassTabBarView
         items={items}
         bubbleItem={bubbleItem}
         activeKey="home"

@@ -44,7 +44,7 @@ Render `TabBarCollapseProvider` around the navigator, and pass the bar as the `t
 import { Ionicons } from '@expo/vector-icons';
 import { Tabs } from 'expo-router';
 import {
-  LiquidGlassTabBarAdapter,
+  LiquidGlassTabBar,
   TabBarCollapseProvider,
   type TabBarItem,
 } from 'reanimated-liquid-glass-tab-bar';
@@ -80,7 +80,7 @@ export default function TabsLayout() {
       <Tabs
         screenOptions={{ headerShown: false }}
         tabBar={props => (
-          <LiquidGlassTabBarAdapter {...props} items={items} bubbleItem={bubbleItem} />
+          <LiquidGlassTabBar {...props} items={items} bubbleItem={bubbleItem} />
         )}>
         <Tabs.Screen name="home" />
         <Tabs.Screen name="inbox" />
@@ -100,7 +100,7 @@ The adapter takes React Navigation's `BottomTabBarProps` as they are:
 
 ```tsx
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { LiquidGlassTabBarAdapter, TabBarCollapseProvider } from 'reanimated-liquid-glass-tab-bar';
+import { LiquidGlassTabBar, TabBarCollapseProvider } from 'reanimated-liquid-glass-tab-bar';
 
 const Tab = createBottomTabNavigator();
 
@@ -109,7 +109,7 @@ function Tabs() {
     <TabBarCollapseProvider>
       <Tab.Navigator
         screenOptions={{ headerShown: false }}
-        tabBar={props => <LiquidGlassTabBarAdapter {...props} items={items} bubbleItem={bubbleItem} />}>
+        tabBar={props => <LiquidGlassTabBar {...props} items={items} bubbleItem={bubbleItem} />}>
         <Tab.Screen name="home" component={HomeScreen} />
         {/* ... */}
       </Tab.Navigator>
@@ -193,7 +193,7 @@ const items: TabBarItem[] = [
   { key: 'inbox', label: 'Inbox', badge: unreadCount, icon: /* ... */ },
 ];
 
-<LiquidGlassTabBarAdapter {...props} items={items} maxBadgeCount={9} />;
+<LiquidGlassTabBar {...props} items={items} maxBadgeCount={9} />;
 ```
 
 Badges are positioned inside each icon's own box, not on the pill's edge. The pill (when collapsed) and the bubble are full circles clipped to their shape, and a badge on the corner of that circle would be cut off.
@@ -209,7 +209,7 @@ Leave `bubbleItem` out for a bar with only the pill.
 Pass any part of the theme; the rest keeps its default:
 
 ```tsx
-<LiquidGlassTabBarAdapter
+<LiquidGlassTabBar
   {...props}
   items={items}
   theme={{
@@ -241,13 +241,13 @@ const dark = {
   borderColor: 'rgba(255,255,255,0.15)',
 };
 
-<LiquidGlassTabBarAdapter {...props} items={items} theme={dark} blurTint="dark" />;
+<LiquidGlassTabBar {...props} items={items} theme={dark} blurTint="dark" />;
 ```
 
 To set a font on the badge, use `badgeTextStyle`:
 
 ```tsx
-<LiquidGlassTabBarAdapter {...props} items={items} badgeTextStyle={{ fontFamily: 'Inter-Bold' }} />
+<LiquidGlassTabBar {...props} items={items} badgeTextStyle={{ fontFamily: 'Inter-Bold' }} />
 ```
 
 ## Blur on Android
@@ -265,7 +265,7 @@ const target = useRef<View>(null);
   <BlurTargetView ref={target} style={{ flex: 1 }}>
     {/* the content behind the bar */}
   </BlurTargetView>
-  <LiquidGlassTabBar {...barProps} blurTarget={target} />
+  <LiquidGlassTabBarView {...barProps} blurTarget={target} />
 </>;
 ```
 
@@ -280,7 +280,7 @@ To mirror the bar instead, set `layoutDirection="rtl"` (for example when `I18nMa
 ```tsx
 import { I18nManager } from 'react-native';
 
-<LiquidGlassTabBarAdapter
+<LiquidGlassTabBar
   {...props}
   items={items}
   layoutDirection={I18nManager.isRTL ? 'rtl' : 'ltr'}
@@ -292,16 +292,16 @@ import { I18nManager } from 'react-native';
 `tabBar` may return `null`, so the bar can be hidden on any screen, for example a detail screen:
 
 ```tsx
-tabBar={props => (hideBar ? null : <LiquidGlassTabBarAdapter {...props} items={items} />)}
+tabBar={props => (hideBar ? null : <LiquidGlassTabBar {...props} items={items} />)}
 ```
 
 ## Without a navigator
 
-`LiquidGlassTabBar` is the bar itself. It is controlled and has no navigation inside: you give it the focused key and handle presses. This is what `LiquidGlassTabBarAdapter` uses.
+`LiquidGlassTabBar` needs a navigator. To use the bar without one, or with another navigation setup, use `LiquidGlassTabBarView`: it is controlled and has no navigation inside. You give it the focused key and handle presses. `LiquidGlassTabBar` is built on it.
 
 ```tsx
 import { useState } from 'react';
-import { LiquidGlassTabBar } from 'reanimated-liquid-glass-tab-bar';
+import { LiquidGlassTabBarView } from 'reanimated-liquid-glass-tab-bar';
 
 function App() {
   const [active, setActive] = useState('home');
@@ -310,7 +310,7 @@ function App() {
   return (
     <>
       {/* your screens */}
-      <LiquidGlassTabBar
+      <LiquidGlassTabBarView
         items={items}
         bubbleItem={bubbleItem}
         activeKey={active}
@@ -327,6 +327,16 @@ Without a collapse state (no provider and no `collapse` prop) the bar never coll
 ## API
 
 ### `LiquidGlassTabBar`
+
+Takes every prop of `LiquidGlassTabBarView` (below) except `activeKey`, `onItemPress`, `onItemLongPress` and `bottomInset`, plus React Navigation's `BottomTabBarProps` (`state`, `navigation`, `insets`, and any other prop you spread in). It:
+
+- uses the focused route's name as `activeKey` and `insets.bottom` as `bottomInset`;
+- emits `tabPress` and `tabLongPress`, and navigates unless a listener called `preventDefault()`, so listeners such as scroll-to-top keep working;
+- leaves out items whose route is not in the navigator.
+
+### `LiquidGlassTabBarView`
+
+The controlled bar, with no navigation inside.
 
 | Prop               | Type                                  | Default                       | Description                                                                                          |
 | ------------------ | ------------------------------------- | ----------------------------- | ---------------------------------------------------------------------------------------------------- |
@@ -350,14 +360,6 @@ Without a collapse state (no provider and no `collapse` prop) the bar never coll
 | `blurMethod`       | `BlurView` `blurMethod`               | `'dimezisBlurViewSdk31Plus'`  | Android only, used with `blurTarget`.                                                                |
 | `style`            | `StyleProp<ViewStyle>`                |                               | Style of the full-width container that positions the bar.                                            |
 | `testID`           | `string`                              |                               |                                                                                                      |
-
-### `LiquidGlassTabBarAdapter`
-
-Takes everything above except `activeKey`, `onItemPress`, `onItemLongPress` and `bottomInset`, plus React Navigation's `BottomTabBarProps` (`state`, `navigation`, `insets`, and any other prop you spread in). It:
-
-- uses the focused route's name as `activeKey` and `insets.bottom` as `bottomInset`;
-- emits `tabPress` and `tabLongPress`, and navigates unless a listener called `preventDefault()`, so listeners such as scroll-to-top keep working;
-- leaves out items whose route is not in the navigator.
 
 ### `TabBarItem`
 
