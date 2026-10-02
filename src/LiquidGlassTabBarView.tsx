@@ -307,7 +307,8 @@ function glassSurface(colors: LiquidGlassTabBarTheme): ViewStyle {
     overflow: 'hidden',
     borderWidth: StyleSheet.hairlineWidth,
     borderColor: colors.borderColor,
-    elevation: 8,
+    // No `elevation`: Android draws that shadow through a translucent surface, which
+    // shows as a lighter patch inside the glass. The `shadow*` props are iOS only.
     shadowColor: colors.shadowColor,
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.15,
