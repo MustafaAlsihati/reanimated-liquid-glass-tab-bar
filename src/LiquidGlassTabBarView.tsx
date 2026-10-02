@@ -56,6 +56,7 @@ export function LiquidGlassTabBarView({
   blurTarget,
   blurMethod = 'dimezisBlurViewSdk31Plus',
   style,
+  surfaceStyle,
   testID,
 }: LiquidGlassTabBarViewProps) {
   const colors = { ...defaultTheme, ...theme };
@@ -151,7 +152,7 @@ export function LiquidGlassTabBarView({
         style,
       ]}>
       {items.length > 0 ? (
-        <Animated.View style={[styles.pill, glassSurface(colors), pillStyle]}>
+        <Animated.View style={[styles.pill, glassSurface(colors), surfaceStyle, pillStyle]}>
           {glass}
           <Animated.View style={[styles.row, rowStyle]}>
             {items.map((item, index) => (
@@ -178,7 +179,7 @@ export function LiquidGlassTabBarView({
           accessibilityRole="tab"
           accessibilityLabel={describe(bubbleItem)}
           accessibilityState={{ selected: bubbleItem.key === activeKey }}
-          style={[styles.bubble, glassSurface(colors)]}
+          style={[styles.bubble, glassSurface(colors), surfaceStyle]}
           onPress={() => onPress(bubbleItem.key)}
           onLongPress={() => onItemLongPress?.(bubbleItem.key)}>
           {glass}

@@ -94,5 +94,11 @@ export interface LiquidGlassTabBarViewProps {
   blurMethod?: BlurViewProps['blurMethod'];
   /** Style of the full-width container that positions the bar. */
   style?: StyleProp<ViewStyle>;
+  /**
+   * Merged over the style of the glass surfaces: the pill and the bubble. Use it for
+   * `elevation` (the shadow on Android) or a different `borderWidth`. Android draws
+   * an elevation shadow through the translucent glass, which shows as a lighter patch.
+   */
+  surfaceStyle?: StyleProp<ViewStyle>;
   testID?: string;
 }

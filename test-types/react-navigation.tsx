@@ -33,6 +33,7 @@ export function controlled() {
         onItemPress={() => {}}
         layoutDirection="rtl"
         theme={{ activeColor: '#000' }}
+        surfaceStyle={{ elevation: 8 }}
       />
     </TabBarCollapseProvider>
   );

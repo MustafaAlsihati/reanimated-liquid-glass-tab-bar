@@ -263,6 +263,24 @@ To set a font on the badge, use `badgeTextStyle`:
 <LiquidGlassTabBar {...props} items={items} badgeTextStyle={{ fontFamily: 'Inter-Bold' }} />
 ```
 
+## Border and shadow
+
+The glass has a thin light border (`theme.borderColor`) and no shadow. On light content the border can be hard to see. Two ways to give the bar more edge:
+
+- a darker border, for example `theme={{ borderColor: "rgba(0,0,0,0.12)" }}`;
+- a shadow, through `surfaceStyle`: `surfaceStyle={{ elevation: 8 }}` on Android.
+
+Android draws an elevation shadow through a translucent surface, so with `elevation` the glass can show a lighter patch where the shadow is cut out. It is most visible over bright, flat colors. The package sets no elevation itself for that reason.
+
+```tsx
+<LiquidGlassTabBar
+  {...props}
+  items={items}
+  theme={{ borderColor: 'rgba(0,0,0,0.12)' }}
+  surfaceStyle={{ elevation: 8 }}
+/>
+```
+
 ## Blur on Android
 
 On iOS the glass uses a real blur. On Android, `expo-blur` only blurs what is inside a `BlurTargetView`, so without one the bar shows its translucent tint (`glassTint`) over the content, which keeps it legible but is not a blur.
@@ -372,6 +390,7 @@ The controlled bar, with no navigation inside.
 | `blurTarget`       | `RefObject<View \| null>`             |                               | Android only. See [Blur on Android](#blur-on-android).                                               |
 | `blurMethod`       | `BlurView` `blurMethod`               | `'dimezisBlurViewSdk31Plus'`  | Android only, used with `blurTarget`.                                                                |
 | `style`            | `StyleProp<ViewStyle>`                |                               | Style of the full-width container that positions the bar.                                            |
+| `surfaceStyle`     | `StyleProp<ViewStyle>`                |                               | Merged over the glass surfaces (the pill and the bubble), for example `{ elevation: 8 }`. See [Border and shadow](#border-and-shadow). |
 | `testID`           | `string`                              |                               |                                                                                                      |
 
 ### `TabBarItem`
