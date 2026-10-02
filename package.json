@@ -1,0 +1,110 @@
+{
+  "name": "reanimated-liquid-glass-tab-bar",
+  "version": "1.0.0",
+  "description": "A floating, frosted-glass tab bar for React Native, built with Reanimated: a pill that collapses to the active tab on scroll, plus an optional always-visible bubble tab",
+  "main": "./lib/commonjs/index.js",
+  "types": "./lib/typescript/commonjs/src/index.d.ts",
+  "files": [
+    "lib",
+    "src"
+  ],
+  "scripts": {
+    "build": "bob build",
+    "clean": "node -e \"require('fs').rmSync('lib',{recursive:true,force:true})\"",
+    "typecheck": "tsc -p tsconfig.json",
+    "test": "yarn build && node --test",
+    "prepare": "yarn build",
+    "prepublishOnly": "yarn test",
+    "release": "yarn build && npm whoami && yarn test && release-it",
+    "release:beta": "yarn build && npm whoami && yarn test && release-it --preRelease=beta"
+  },
+  "packageManager": "yarn@4.9.1",
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org",
+    "access": "public"
+  },
+  "keywords": [
+    "react-native",
+    "expo",
+    "reanimated",
+    "tab-bar",
+    "bottom-tabs",
+    "liquid-glass",
+    "glassmorphism",
+    "blur",
+    "expo-router",
+    "react-navigation"
+  ],
+  "author": "Mustafa Alsihati",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MustafaAlsihati/reanimated-liquid-glass-tab-bar.git"
+  },
+  "bugs": {
+    "url": "https://github.com/MustafaAlsihati/reanimated-liquid-glass-tab-bar/issues"
+  },
+  "homepage": "https://github.com/MustafaAlsihati/reanimated-liquid-glass-tab-bar#readme",
+  "engines": {
+    "node": ">=20"
+  },
+  "peerDependencies": {
+    "expo-blur": ">=15.0.0",
+    "react": ">=18",
+    "react-native": ">=0.76",
+    "react-native-reanimated": ">=3.16.0"
+  },
+  "devDependencies": {
+    "@react-navigation/bottom-tabs": "^7",
+    "@react-navigation/native": "^7",
+    "@types/node": "^22.0.0",
+    "@types/react": "~19.2.0",
+    "expo-blur": "~57.0.2",
+    "react": "19.2.8",
+    "react-native": "0.86.3",
+    "react-native-builder-bob": "^0.43.1",
+    "react-native-reanimated": "4.5.1",
+    "react-native-worklets": "0.10.1",
+    "release-it": "^20.2.1",
+    "typescript": "~6.0.3"
+  },
+  "module": "./lib/module/index.js",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./lib/typescript/module/src/index.d.ts",
+        "default": "./lib/module/index.js"
+      },
+      "require": {
+        "types": "./lib/typescript/commonjs/src/index.d.ts",
+        "default": "./lib/commonjs/index.js"
+      }
+    },
+    "./package.json": "./package.json"
+  },
+  "sideEffects": false,
+  "react-native-builder-bob": {
+    "source": "src",
+    "output": "lib",
+    "targets": [
+      [
+        "commonjs",
+        {
+          "esm": true
+        }
+      ],
+      [
+        "module",
+        {
+          "esm": true
+        }
+      ],
+      [
+        "typescript",
+        {
+          "project": "tsconfig.build.json"
+        }
+      ]
+    ]
+  }
+}
