@@ -1,6 +1,6 @@
 {
 	"name": "reanimated-liquid-glass-tab-bar",
-	"version": "0.1.0",
+	"version": "1.0.0",
 	"description": "A floating, frosted-glass tab bar for React Native, built with Reanimated: a pill that collapses to the active tab on scroll, plus an optional always-visible bubble tab",
 	"main": "./lib/commonjs/index.js",
 	"types": "./lib/typescript/commonjs/src/index.d.ts",
