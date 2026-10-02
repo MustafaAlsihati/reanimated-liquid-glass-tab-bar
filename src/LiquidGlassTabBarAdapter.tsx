@@ -6,7 +6,7 @@ import type { LiquidGlassTabBarProps } from './types';
  * declared here, rather than imported, so the package does not depend on a
  * navigation library. The real `BottomTabBarProps` fits it as is.
  */
-export interface ReactNavigationTabBarProps {
+export interface NavigationTabBarProps {
   state: {
     index: number;
     routes: ReadonlyArray<{ key: string; name: string }>;
@@ -18,7 +18,7 @@ export interface ReactNavigationTabBarProps {
   insets: { bottom: number };
 }
 
-export type ReactNavigationLiquidGlassTabBarProps = ReactNavigationTabBarProps &
+export type LiquidGlassTabBarAdapterProps = NavigationTabBarProps &
   Omit<LiquidGlassTabBarProps, 'activeKey' | 'onItemPress' | 'onItemLongPress' | 'bottomInset'>;
 
 /** React Navigation's event object has `defaultPrevented` set once a listener called `preventDefault()`. */
@@ -31,21 +31,21 @@ function wasPrevented(event: unknown) {
  * Expo Router's `<Tabs>`. Pass it as the navigator's `tabBar`:
  *
  * ```tsx
- * <Tabs tabBar={props => <ReactNavigationLiquidGlassTabBar {...props} items={items} bubbleItem={bubble} />} />
+ * <Tabs tabBar={props => <LiquidGlassTabBarAdapter {...props} items={items} bubbleItem={bubble} />} />
  * ```
  *
  * Each item's `key` is a route name. The tabs and the order come from `items`,
  * not from the order of the navigator's screens, and an item whose route is not
  * in the navigator is left out (for example a hidden tab).
  */
-export function ReactNavigationLiquidGlassTabBar({
+export function LiquidGlassTabBarAdapter({
   state,
   navigation,
   insets,
   items,
   bubbleItem,
   ...barProps
-}: ReactNavigationLiquidGlassTabBarProps) {
+}: LiquidGlassTabBarAdapterProps) {
   const hasRoute = (name: string) => state.routes.some(route => route.name === name);
   const activeKey = state.routes[state.index]?.name;
 

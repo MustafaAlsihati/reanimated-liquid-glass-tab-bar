@@ -1,9 +1,9 @@
 export { LiquidGlassTabBar } from './LiquidGlassTabBar';
 export {
-  ReactNavigationLiquidGlassTabBar,
-  type ReactNavigationLiquidGlassTabBarProps,
-  type ReactNavigationTabBarProps,
-} from './ReactNavigationLiquidGlassTabBar';
+  LiquidGlassTabBarAdapter,
+  type LiquidGlassTabBarAdapterProps,
+  type NavigationTabBarProps,
+} from './LiquidGlassTabBarAdapter';
 export {
   TabBarCollapseProvider,
   useTabBarCollapse,

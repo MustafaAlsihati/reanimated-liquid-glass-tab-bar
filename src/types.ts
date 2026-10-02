@@ -11,7 +11,7 @@ export interface TabBarIconProps {
 }
 
 export interface TabBarItem {
-  /** Unique within the bar. With `ReactNavigationLiquidGlassTabBar` this is the route name. */
+  /** Unique within the bar. With `LiquidGlassTabBarAdapter` this is the route name. */
   key: string;
   /** Read by screen readers. The bar shows icons only. */
   label: string;

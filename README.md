@@ -44,7 +44,7 @@ Render `TabBarCollapseProvider` around the navigator, and pass the bar as the `t
 import { Ionicons } from '@expo/vector-icons';
 import { Tabs } from 'expo-router';
 import {
-  ReactNavigationLiquidGlassTabBar,
+  LiquidGlassTabBarAdapter,
   TabBarCollapseProvider,
   type TabBarItem,
 } from 'reanimated-liquid-glass-tab-bar';
@@ -80,7 +80,7 @@ export default function TabsLayout() {
       <Tabs
         screenOptions={{ headerShown: false }}
         tabBar={props => (
-          <ReactNavigationLiquidGlassTabBar {...props} items={items} bubbleItem={bubbleItem} />
+          <LiquidGlassTabBarAdapter {...props} items={items} bubbleItem={bubbleItem} />
         )}>
         <Tabs.Screen name="home" />
         <Tabs.Screen name="inbox" />
@@ -100,7 +100,7 @@ The adapter takes React Navigation's `BottomTabBarProps` as they are:
 
 ```tsx
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { ReactNavigationLiquidGlassTabBar, TabBarCollapseProvider } from 'reanimated-liquid-glass-tab-bar';
+import { LiquidGlassTabBarAdapter, TabBarCollapseProvider } from 'reanimated-liquid-glass-tab-bar';
 
 const Tab = createBottomTabNavigator();
 
@@ -109,7 +109,7 @@ function Tabs() {
     <TabBarCollapseProvider>
       <Tab.Navigator
         screenOptions={{ headerShown: false }}
-        tabBar={props => <ReactNavigationLiquidGlassTabBar {...props} items={items} bubbleItem={bubbleItem} />}>
+        tabBar={props => <LiquidGlassTabBarAdapter {...props} items={items} bubbleItem={bubbleItem} />}>
         <Tab.Screen name="home" component={HomeScreen} />
         {/* ... */}
       </Tab.Navigator>
@@ -193,7 +193,7 @@ const items: TabBarItem[] = [
   { key: 'inbox', label: 'Inbox', badge: unreadCount, icon: /* ... */ },
 ];
 
-<ReactNavigationLiquidGlassTabBar {...props} items={items} maxBadgeCount={9} />;
+<LiquidGlassTabBarAdapter {...props} items={items} maxBadgeCount={9} />;
 ```
 
 Badges are positioned inside each icon's own box, not on the pill's edge. The pill (when collapsed) and the bubble are full circles clipped to their shape, and a badge on the corner of that circle would be cut off.
@@ -209,7 +209,7 @@ Leave `bubbleItem` out for a bar with only the pill.
 Pass any part of the theme; the rest keeps its default:
 
 ```tsx
-<ReactNavigationLiquidGlassTabBar
+<LiquidGlassTabBarAdapter
   {...props}
   items={items}
   theme={{
@@ -241,13 +241,13 @@ const dark = {
   borderColor: 'rgba(255,255,255,0.15)',
 };
 
-<ReactNavigationLiquidGlassTabBar {...props} items={items} theme={dark} blurTint="dark" />;
+<LiquidGlassTabBarAdapter {...props} items={items} theme={dark} blurTint="dark" />;
 ```
 
 To set a font on the badge, use `badgeTextStyle`:
 
 ```tsx
-<ReactNavigationLiquidGlassTabBar {...props} items={items} badgeTextStyle={{ fontFamily: 'Inter-Bold' }} />
+<LiquidGlassTabBarAdapter {...props} items={items} badgeTextStyle={{ fontFamily: 'Inter-Bold' }} />
 ```
 
 ## Blur on Android
@@ -280,7 +280,7 @@ To mirror the bar instead, set `layoutDirection="rtl"` (for example when `I18nMa
 ```tsx
 import { I18nManager } from 'react-native';
 
-<ReactNavigationLiquidGlassTabBar
+<LiquidGlassTabBarAdapter
   {...props}
   items={items}
   layoutDirection={I18nManager.isRTL ? 'rtl' : 'ltr'}
@@ -292,12 +292,12 @@ import { I18nManager } from 'react-native';
 `tabBar` may return `null`, so the bar can be hidden on any screen, for example a detail screen:
 
 ```tsx
-tabBar={props => (hideBar ? null : <ReactNavigationLiquidGlassTabBar {...props} items={items} />)}
+tabBar={props => (hideBar ? null : <LiquidGlassTabBarAdapter {...props} items={items} />)}
 ```
 
 ## Without a navigator
 
-`LiquidGlassTabBar` is the bar itself. It is controlled and has no navigation inside: you give it the focused key and handle presses. This is what `ReactNavigationLiquidGlassTabBar` uses.
+`LiquidGlassTabBar` is the bar itself. It is controlled and has no navigation inside: you give it the focused key and handle presses. This is what `LiquidGlassTabBarAdapter` uses.
 
 ```tsx
 import { useState } from 'react';
@@ -351,7 +351,7 @@ Without a collapse state (no provider and no `collapse` prop) the bar never coll
 | `style`            | `StyleProp<ViewStyle>`                |                               | Style of the full-width container that positions the bar.                                            |
 | `testID`           | `string`                              |                               |                                                                                                      |
 
-### `ReactNavigationLiquidGlassTabBar`
+### `LiquidGlassTabBarAdapter`
 
 Takes everything above except `activeKey`, `onItemPress`, `onItemLongPress` and `bottomInset`, plus React Navigation's `BottomTabBarProps` (`state`, `navigation`, `insets`, and any other prop you spread in). It:
 

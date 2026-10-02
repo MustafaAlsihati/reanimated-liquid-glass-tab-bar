@@ -35,7 +35,7 @@ const defaultTheme: LiquidGlassTabBarTheme = {
  * an optional bubble tab that never collapses.
  *
  * It is a controlled component with no navigation inside. For React Navigation
- * and Expo Router use `ReactNavigationLiquidGlassTabBar`.
+ * and Expo Router use `LiquidGlassTabBarAdapter`.
  */
 export function LiquidGlassTabBar({
   items,
