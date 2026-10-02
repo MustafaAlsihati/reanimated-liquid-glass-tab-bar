@@ -241,7 +241,6 @@ Pass any part of the theme; the rest keeps its default:
 | `highlightOpacity`     | `0.18`                     | Opacity of the circle behind the focused icon.                   |
 | `glassTint`            | `rgba(255,255,255,0.55)`   | Color laid over the blur, so icons stay legible on any content.  |
 | `borderColor`          | `rgba(255,255,255,0.5)`    | The thin outline of the glass.                                   |
-| `shadowColor`          | `#000000`                  | Color of the shadow under the bar. iOS only: Android has none.   |
 | `badgeBackgroundColor` | `#FF3B30`                  | Badge fill.                                                      |
 | `badgeTextColor`       | `#FFFFFF`                  | Badge text.                                                      |
 

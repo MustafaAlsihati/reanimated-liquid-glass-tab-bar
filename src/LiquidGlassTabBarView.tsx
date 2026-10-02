@@ -24,7 +24,6 @@ const defaultTheme: LiquidGlassTabBarTheme = {
   highlightOpacity: 0.18,
   glassTint: 'rgba(255,255,255,0.55)',
   borderColor: 'rgba(255,255,255,0.5)',
-  shadowColor: '#000000',
   badgeBackgroundColor: '#FF3B30',
   badgeTextColor: '#FFFFFF',
 };
@@ -309,7 +308,7 @@ function glassSurface(colors: LiquidGlassTabBarTheme): ViewStyle {
     borderColor: colors.borderColor,
     // No `elevation`: Android draws that shadow through a translucent surface, which
     // shows as a lighter patch inside the glass. The `shadow*` props are iOS only.
-    shadowColor: colors.shadowColor,
+    shadowColor: '#000000',
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.15,
     shadowRadius: 8,

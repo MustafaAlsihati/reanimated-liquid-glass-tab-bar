@@ -34,8 +34,6 @@ export interface LiquidGlassTabBarTheme {
   glassTint: string;
   /** @default 'rgba(255,255,255,0.5)' */
   borderColor: string;
-  /** iOS only: Android draws no shadow under the bar. @default '#000000' */
-  shadowColor: string;
   /** @default '#FF3B30' */
   badgeBackgroundColor: string;
   /** @default '#FFFFFF' */
